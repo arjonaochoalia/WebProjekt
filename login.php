@@ -42,7 +42,7 @@
             <div>
                 <p>
                     Don't have an account?
-                    <a href="register.php" class="text-decoration-none">Sign up here</a>
+                    <a href="register_page.html" class="text-decoration-none">Sign up here</a>
                 </p>
             </div>
         </div>
