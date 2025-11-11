@@ -1,53 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+require 'db_connection.php'; // connect to database
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</head>
+if (isset($_POST['submit'])) {
+    echo "debug: if clause..";
+    $email    = $_POST['email'];
+    $password = $_POST['password'];
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="index.php">Home</a>
-                <a class="nav-item nav-link" href="events.php">Events</a>
-                <a class="nav-item nav-link" href="#">Community</a>
-                <a class="nav-item nav-link active" href="login.php">Login <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">Profile</a>
-            </div>
-        </div>
-    </nav>
-    <div class="container d-flex justify-content-center align-items-center text-center" style="height: 100vh;">
-        <div class="col-6">
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-            <div>
-                <p>
-                    Don't have an account?
-                    <a href="register_page.html" class="text-decoration-none">Sign up here</a>
-                </p>
-            </div>
-        </div>
-    </div>
+    //SQL
+    $sql = "SELECT user_password FROM users WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
 
-</body>
+    $stmt->bind_result($stored_hash);
+    $fetch_success = $stmt->fetch();
+    $stmt->close();
+    $conn->close();
 
-</html>
+    //check if we were able to get the password hash from the database
+    if (!$fetch_success) {
+        $stored_hash = null;
+    }
+
+    //check if the password matches the hashed password in the database
+    if ($stored_hash == null) {
+        echo "Email or password incorrect!";
+    } else {
+        if (password_verify($password, $stored_hash)) {
+            echo "Login was successful.";
+            $_SESSION["email"] = $email;
+
+            // Redirect to home page
+            header("Location: /Webprojekt/index.php");
+            exit;
+        } else {
+            echo "Invalid password.";
+        }
+    }
+}

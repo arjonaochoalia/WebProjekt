@@ -20,7 +20,6 @@ require 'db_connection.php'; // connect to database
 
 
 if (isset($_POST['submit'])) {
-    echo "creating user..";
     $username = $_POST['username'];
     $email    = $_POST['email'];
     $password = $_POST['password'];
