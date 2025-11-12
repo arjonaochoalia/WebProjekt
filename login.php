@@ -1,34 +1,35 @@
 <?php
-require 'db_connection.php'; // connect to database
+session_start(); 
+
+require 'db_connection.php'; // database connection
 
 if (isset($_POST['submit'])) {
-    echo "debug: if clause..";
     $email    = $_POST['email'];
     $password = $_POST['password'];
 
-    //SQL
-    $sql = "SELECT user_password FROM users WHERE email = ?";
+    // fetch data from database
+    $sql = "SELECT user_id, first_name, last_name, user_role, user_password 
+            FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
 
-    $stmt->bind_result($stored_hash);
+    // bind results
+    $stmt->bind_result($user_id, $first_name, $last_name, $user_role, $stored_hash);
     $fetch_success = $stmt->fetch();
     $stmt->close();
     $conn->close();
 
-    //check if we were able to get the password hash from the database
     if (!$fetch_success) {
-        $stored_hash = null;
-    }
-
-    //check if the password matches the hashed password in the database
-    if ($stored_hash == null) {
         echo "Email or password incorrect!";
     } else {
         if (password_verify($password, $stored_hash)) {
-            echo "Login was successful.";
-            $_SESSION["email"] = $email;
+
+            $_SESSION['user_id']    = $user_id;
+            $_SESSION['first_name'] = $first_name;
+            $_SESSION['last_name']  = $last_name;
+            $_SESSION['user_role']  = $user_role;
+            $_SESSION['email']      = $email;
 
             // Redirect to home page
             header("Location: /Webprojekt/index.php");
@@ -38,3 +39,4 @@ if (isset($_POST['submit'])) {
         }
     }
 }
+?>
