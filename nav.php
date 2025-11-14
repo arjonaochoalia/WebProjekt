@@ -22,6 +22,7 @@ $currentPage = basename($_SERVER['PHP_SELF']); //current page
                 <a class="nav-item nav-link <?= $currentPage === 'profile.php' ? 'active' : '' ?>" href="profile.php">
                     <?= htmlspecialchars($_SESSION['first_name']) ?>
                 </a>
+                <a class="nav-item nav-link <?= $currentPage === 'logout.php' ? 'active' : '' ?>" href="logout.php">Logout</a>
             <?php else: ?>
                 <a class="nav-item nav-link <?= $currentPage === 'login_page.php' ? 'active' : '' ?>" href="login_page.php">
                     Login <span class="sr-only">(current)</span>
