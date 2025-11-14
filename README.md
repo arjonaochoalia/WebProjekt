@@ -37,10 +37,10 @@ Example Events for testing purposes:
 
 INSERT INTO events (admin_id, title, description, location, event_date, event_time, image_path)
 VALUES
-(2, 'Kunst-Workshop für Erwachsene', 
+(3, 'Kunst-Workshop für Erwachsene', 
 'Entdecken Sie Ihre kreative Seite bei unserem Kunst-Workshop für Erwachsene. Unter Anleitung erfahrener Künstler können Sie Maltechniken ausprobieren und Ihr eigenes Kunstwerk gestalten. Alle Materialien werden gestellt.', 
 'Kunsthalle Wien, 1010 Wien', 
-'2025-05-10', '14:00:00', 'images/kunstworkshop.jpg');
+'2025-05-10', '14:00:00', 'Bilder/kunstworkshop.jpg');
 
 
 INSERT INTO events (admin_id, title, description, location, event_date, event_time, image_path)
@@ -48,6 +48,6 @@ VALUES
 (3, 'Lauftreff im Prater', 
 'Treffen Sie Gleichgesinnte und genießen Sie gemeinsam eine Lauf-Runde durch den Wiener Prater. Anfänger und Fortgeschrittene sind willkommen. Treffpunkt ist der Haupteingang. Bitte Sportschuhe und Wasser mitbringen.', 
 'Wiener Prater, 1020 Wien', 
-'2025-06-22', '08:00:00', 'images/lauftreff.jpg');
+'2025-06-22', '08:00:00', 'Bilder/lauftreff.jpg');
 
 
