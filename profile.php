@@ -8,11 +8,59 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <title>Community</title>
+    <title>Profile</title>
 </head>
 
 <body>
     <?php include 'nav.php' ?>
+    <div class="container mt-4">
+
+        <!-- Top section -->
+        <div class="row">
+
+            <!-- Left column: Image -->
+            <div class="col-md-4">
+                <img src="https://via.placeholder.com/300x300"
+                    class="img-fluid rounded border"
+                    alt="User Image">
+            </div>
+
+            <!-- Right column: Display fields -->
+            <div class="col-md-8">
+
+                <div class="mb-2">
+                    <strong>First Name:</strong> <span><?php echo $_SESSION['first_name']; ?></span>
+                </div>
+
+                <div class="mb-2">
+                    <strong>Last Name:</strong> <span><?php echo $_SESSION['last_name']; ?></span>
+                </div>
+
+                <div class="mb-2">
+                    <strong>Email:</strong> <span><?php echo $_SESSION['email']; ?></span>
+                </div>
+                <div class="mb-2">
+                    <strong>Username:</strong> <span><?php echo $_SESSION['username']; ?></span>
+                </div>
+                <div class="mb-2">
+                    <strong>Role:</strong> <span><?php echo $_SESSION['user_role']; ?></span>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="mt-4 p-3 border rounded">
+            <h5>Additional Information</h5>
+            <p>TODO: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque 
+                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto 
+                beatae vitae dicta sunt explicabo</p>
+        </div>
+
+    </div>
+
+
 </body>
 
 </html>
