@@ -23,7 +23,7 @@
                 <?php if ($_SESSION['user_role'] == 'admin') {
 
                 ?>
-                    <a href="add_event.php" class="btn btn-primary">
+                    <a href="add_event_page.php" class="btn btn-primary">
                         Add New
                     </a>
             <?php }
