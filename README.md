@@ -14,7 +14,7 @@ CREATE TABLE users (
     PRIMARY KEY (user_id),
     UNIQUE KEY username (username),
     UNIQUE KEY email (email)
-) 
+);
 
 
 CREATE TABLE events (
@@ -29,7 +29,21 @@ CREATE TABLE events (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (event_id),
     KEY admin_id (admin_id)
-) 
+);
+
+CREATE TABLE user_events (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    event_id INT NOT NULL,
+    liked BOOLEAN DEFAULT FALSE,
+    participating BOOLEAN DEFAULT FALSE,
+    UNIQUE (user_id, event_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE
+);
+
+
+
 
 
 Example Events for testing purposes:
