@@ -11,7 +11,7 @@
     <title>Events</title>
 </head>
 
-<body>
+<body style="background-color:#FFF2EF">
     <?php include 'nav.php' ?>
     <div class="container mt-4">
 

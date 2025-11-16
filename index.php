@@ -31,13 +31,14 @@
         </div>
     </section>
     <!--What We Offer-->
-    <section class="container my-5">
+    <section class="container my-3">
         <div class="row align-items-center">
-            <div class="col-md-6">
+            <div class="col-md-6 d-none d-md-block">
                 <img src="Bilder/home_section_two.jpg" class="img-fluid rounded shadow" alt="Beauty Workshop" width=93%>
             </div>
-            <div class="col-md-6">
+            <div class=" col-12 col-md-6">
                 <h2 class="fw-bold mb-3">What We Offer</h2>
+                            <img src="Bilder/home_section_two.jpg" class="img-fluid rounded shadow d-block d-md-none mb-3" alt="Beauty Workshop">
                 <p class="lead mx-auto" style="max-width: 700px;">
                     At Beauty Lab, we believe that learning should be practical, creative and fun. Our events and workshops are designed for anyone who wants to deepen their knowledge and skills in the world of beauty and wellness. Participants can explore a variety of topics such as hairstyling, skincare, massage, manicure and pedicure.
                     <br><br>
@@ -45,7 +46,27 @@
                     <br><br>
                     Meet like-minded people, share your passion and be part of a supportive community that celebrates creativity, self-care and professional development. Join Beauty Lab and take the next step toward becoming a true beauty expert.
                 </p>
-                <a href="#" class="btn btn-primary mt-3">Explore Events</a>
+                <a href="events.php" class="btn btn-primary mt-3">Explore Events</a>
+            </div>
+        </div>
+    </section>
+    <!--Our Community-->
+    <section class="container my-5">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-6 style="margin-top: 5rem;">
+                <h2 class="fw-bold mb-3">Our Community</h2>
+                            <img src="Bilder/home_section_three.jpg" class="img-fluid rounded shadow d-block d-md-none mb-3" alt="Community Picture">
+                <p class="lead mx-auto" style="max-width: 700px;">
+                    At Beauty Lab, our community is a place where people come together to connect, exchange experience and celebrate their passion for beauty and wellness. It is a welcoming space for anyone who enjoys creativity, learning and sharing experiences with others.
+                    <br><br>
+                    On our community page, members can express themselves freely, start conversations and inspire others with their thoughts. It is a dynamic environment where everyone can participate, discover new perspectives and feel encouraged to contribute.
+                    <br><br>
+                    Join our growing community and become part of a supportive network that values collaboration, positivity and personal growth. Together we create a space where everyone can learn, shine and feel connected.
+                </p>
+                <a href="community.php" class="btn btn-primary mt-3">Join our Community</a>
+            </div>
+            <div class="col-md-6 d-none d-md-block">
+                <img src="Bilder/home_section_three.jpg" class="img-fluid rounded shadow" alt="Community Picture" width=93%>
             </div>
         </div>
     </section>

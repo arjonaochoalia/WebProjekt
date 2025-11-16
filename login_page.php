@@ -18,27 +18,30 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body style="background-color:#FFF2EF">
     <?php include 'nav.php' ?>
-    
-    <div class="container d-flex justify-content-center align-items-center text-center" style="height: 100vh;">
-        <div class="col-6">
-            <form action="login.php" method="POST">
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email">
+
+    <div class="container d-flex justify-content-center align-items-center text-center" style="min-height: 100vh;">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card shadow-lg rounded-lg p-5">
+                <h2 class="text-center mb-4">Login</h2>
+                <form action="login.php" method="POST">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <button type="submit" name="submit" class="btn btn-primary">Login</button>
+                </form>
+                <div>
+                    <p>
+                        Don't have an account?
+                        <a href="register_page.php" class="text-decoration-none">Sign up here</a>
+                    </p>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                </div>
-                <button type="submit" name="submit" class="btn btn-primary">Login</button>
-            </form>
-            <div>
-                <p>
-                    Don't have an account?
-                    <a href="register_page.php" class="text-decoration-none">Sign up here</a>
-                </p>
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@
     <title>Community</title>
 </head>
 
-<body>
+<body style="background-color:#FFF2EF">
     <?php include 'nav.php' ?>
 </body>
 
