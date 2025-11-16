@@ -64,14 +64,18 @@ VALUES
 'Wiener Prater, 1020 Wien', 
 '2025-06-22', '08:00:00', 'Bilder/lauftreff.jpg');
 
---new
+--NEW
+
 -- Users
+
 INSERT INTO users (user_id, username, first_name, last_name, email, user_password, user_role, created_at)
 VALUES 
 (1, 'lia_1230', 'Lia', 'Arjona', 'arjona.lia05@gmail.com', '$2y$10$sLI8trAhpgJNG3lQJw3w5..UzcrAH9zB4r/tyw7Y.q9Cn3tPfAOiK', 'admin', '2025-11-13 16:57:39'),
 (2, 'max_musterman', 'Max', 'Mustermann', 'max.mustermann@gmail.com', '$2y$10$Mu8Wsk9NwUdTfpJ0jhghgOPRpDpX.nOJUnGZMuOZHd4pBJeCtGNOG', 'user', '2025-11-16 22:32:24');
 
+
 -- Events
+
 INSERT INTO events (event_id, admin_id, title, description, location, event_date, event_time, image_path, created_at)
 VALUES 
 (3, 1, 'Facials Workshop', 'Learn the fundamentals of professional facial treatments and pamper your skin. From cleansing and exfoliation to massage techniques – explore different methods suitable for every skin type. Please bring a towel and wear comfortable clothing. Beginners are warmly welcome.', NULL, '2025-11-23', '14:30:00', 'Bilder/691a3a579193e_facials_workshop.jpg', '2025-11-16 21:55:51'),
