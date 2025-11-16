@@ -38,8 +38,8 @@ CREATE TABLE user_events (
     liked BOOLEAN DEFAULT FALSE,
     participating BOOLEAN DEFAULT FALSE,
     UNIQUE (user_id, event_id),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE
 );
 
 
