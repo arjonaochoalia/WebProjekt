@@ -6,3 +6,4 @@ session_destroy();
 // Redirect to login
 header("Location: login_page.php");
 exit;
+?>

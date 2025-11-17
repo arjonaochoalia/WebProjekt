@@ -48,7 +48,8 @@
 
                                 <p class="card-text">
                                     <strong>Date:</strong> <?php echo $row["event_date"]; ?><br>
-                                    <strong>Time:</strong> <?php echo $row["event_time"]; ?>
+                                    <strong>Time:</strong> <?php echo $row["event_time"]; ?><br>
+                                    <strong>Location:</strong> <?php echo $row["location"]; ?>
                                 </p>
                             </div>
 
