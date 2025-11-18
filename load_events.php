@@ -66,7 +66,7 @@
                                     </button>
                                 </div>
                                 <?php
-                                // Delete button for admins (or event owner)
+                                // Delete button only for the admin that created the event
                                 if ($_SESSION['user_id'] == $row["admin_id"]) {
                                 ?>
                                     <div class="card-footer">
