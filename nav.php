@@ -12,7 +12,7 @@ $currentPage = basename($_SERVER['PHP_SELF']); //current page
         <div class="navbar-nav">
             <a class="nav-item nav-link <?= $currentPage === 'index.php' ? 'active' : '' ?>" href="index.php">Home</a>
             <a class="nav-item nav-link <?= $currentPage === 'events.php' ? 'active' : '' ?>" href="events.php">Events</a>
-            <a class="nav-item nav-link <?= $currentPage === 'community.php' ? 'active' : '' ?>" href="community.php">Community</a>
+            <a class="nav-item nav-link <?= $currentPage === 'community.php' ? 'active' : '' ?>" href="community.php">Feedback</a>
         </div>
 
         <!-- Second navbar-nav with ml-auto to push to the right -->

@@ -38,7 +38,7 @@
             </div>
             <div class=" col-12 col-md-6">
                 <h2 class="fw-bold mb-3">What We Offer</h2>
-                            <img src="Bilder/home_section_two.jpg" class="img-fluid rounded shadow d-block d-md-none mb-3" alt="Beauty Workshop">
+                <img src="Bilder/home_section_two.jpg" class="img-fluid rounded shadow d-block d-md-none mb-3" alt="Beauty Workshop">
                 <p class="lead mx-auto" style="max-width: 700px;">
                     At Beauty Lab, we believe that learning should be practical, creative and fun. Our events and workshops are designed for anyone who wants to deepen their knowledge and skills in the world of beauty and wellness. Participants can explore a variety of topics such as hairstyling, skincare, massage, manicure and pedicure.
                     <br><br>
@@ -50,20 +50,20 @@
             </div>
         </div>
     </section>
-    <!--Our Community-->
+    <!--Reviews-->
     <section class="container my-5">
         <div class="row align-items-center">
-            <div class="col-12 col-md-6 style="margin-top: 5rem;">
-                <h2 class="fw-bold mb-3">Our Community</h2>
-                            <img src="Bilder/home_section_three.jpg" class="img-fluid rounded shadow d-block d-md-none mb-3" alt="Community Picture">
+            <div class="col-12 col-md-6 style=" margin-top: 5rem;">
+                <h2 class="fw-bold mb-3">Your BeautyLab Story's</h2>
+                <img src="Bilder/home_section_three.jpg" class="img-fluid rounded shadow d-block d-md-none mb-3" alt="Community Picture">
                 <p class="lead mx-auto" style="max-width: 700px;">
-                    At Beauty Lab, our community is a place where people come together to connect, exchange experience and celebrate their passion for beauty and wellness. It is a welcoming space for anyone who enjoys creativity, learning and sharing experiences with others.
+                    At Beauty Lab, our feedback page is a space where our participants share their honest experiences, impressions and moments from the events they attended. It is a welcoming place for anyone who wants to discover how others have enjoyed our beauty and wellness workshops.
                     <br><br>
-                    On our community page, members can express themselves freely, start conversations and inspire others with their thoughts. It is a dynamic environment where everyone can participate, discover new perspectives and feel encouraged to contribute.
+                    On this page, you can explore personal reviews, see what our users loved most and gain real insights into the atmosphere and quality of our events. Their stories and ratings help you get a clearer picture and may inspire you to try something new yourself.
                     <br><br>
-                    Join our growing community and become part of a supportive network that values collaboration, positivity and personal growth. Together we create a space where everyone can learn, shine and feel connected.
+                    Take a moment to read through the feedback and let our community’s experiences guide and motivate you. Join us, get inspired, and see for yourself why Beauty Lab is a place where people learn, grow and feel empowered.
                 </p>
-                <a href="community.php" class="btn btn-primary mt-3">Join our Community</a>
+                <a href="community.php" class="btn btn-primary mt-3">View Feedback</a>
             </div>
             <div class="col-md-6 d-none d-md-block">
                 <img src="Bilder/home_section_three.jpg" class="img-fluid rounded shadow" alt="Community Picture" width=93%>
