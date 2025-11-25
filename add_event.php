@@ -28,6 +28,7 @@ if (isset($_POST['submit'])) {
     echo "debug: after stmt";
     if ($stmt->execute()) {
         echo "Event added successfully!";
+        header("Location: events.php");
     } else {
         echo "Error: " . $stmt->error;
     }

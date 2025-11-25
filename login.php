@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['email']      = $email;
 
             // Redirect to home page
-            header("Location: /Webprojekt/index.php");
+            header("Location: /WebProjekt/profile.php");
             exit;
         } else {
             echo "Invalid password.";

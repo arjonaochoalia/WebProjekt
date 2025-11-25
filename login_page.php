@@ -19,7 +19,17 @@
 </head>
 
 <body style="background-color:#FFF2EF">
-    <?php include 'nav.php' ?>
+    <?php
+    include 'nav.php';
+    //the following is only displayed when a user is redirected
+    //from the registration page to login page
+    //after successfully registering
+    if (isset($_SESSION['success_message'])) {
+        echo '<p class="alert alert-success">' . $_SESSION['success_message'] . '</p>';
+        unset($_SESSION['success_message']);
+    }
+    ?>
+
 
     <div class="container d-flex justify-content-center align-items-center text-center" style="min-height: 100vh;">
         <div class="col-12 col-md-8 col-lg-6">

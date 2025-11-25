@@ -21,7 +21,7 @@
             //for each row we create a card on events page and fill it with data from the database
             //if user is logged in we display two buttons for favorite and participate
             //if user id matches the admin id from the card (meaning this user created the event initially) we display a delete button
-            //TODO: add the logic for deleting in db, fix layout/design, add a button that lets admins create new events
+            //TODO: add the logic for deleting in db
 
             $sql = "SELECT event_id, admin_id, title, description, location, event_date, event_time, image_path FROM events";
             $result = $conn->query($sql);
