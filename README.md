@@ -81,4 +81,7 @@ VALUES
 (3, 1, 'Facials Workshop', 'Learn the fundamentals of professional facial treatments and pamper your skin. From cleansing and exfoliation to massage techniques – explore different methods suitable for every skin type. Please bring a towel and wear comfortable clothing. Beginners are warmly welcome.', NULL, '2025-11-23', '14:30:00', 'Bilder/691a3a579193e_facials_workshop.jpg', '2025-11-16 21:55:51'),
 (4, 1, 'Lash Extension Workshop', 'Learn professional techniques for flawless eyelash extensions and stunning looks. In this workshop, you will practice applying extensions, proper aftercare, and tips for long-lasting results. Bring a steady hand, attention to detail, and curiosity – beginners are warmly welcome.', NULL, '2025-12-12', '09:10:00', 'Bilder/691a3d7498254_lash_extension_workshop.jpg', '2025-11-16 22:09:08');
 
+-- Reviews
+
+CREATE TABLE reviews ( review_id INT AUTO_INCREMENT PRIMARY KEY, user_id INT NOT NULL, content TEXT NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (user_id) REFERENCES users(user_id) );
 
