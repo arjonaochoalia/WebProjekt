@@ -1,20 +1,26 @@
 <?php
 require 'db_connection.php';
 
-$sql = "DELETE FROM events WHERE event_id = ?";
-$stmt = $conn->prepare($sql);
+$event_id = $_POST['event_id'];
 
-$stmt->bind_param("i", $_POST['event_id']);
+// we have to delete the entries in user_events table first
+// before we can delete and event from event table
+$deleteUserEvents = $conn->prepare("DELETE FROM user_events WHERE event_id = ?");
+$deleteUserEvents->bind_param("i", $event_id);
+$deleteUserEvents->execute();
+$deleteUserEvents->close();
 
-if ($stmt->execute()) {
-    echo "Event deleted successfully!";
+// delete the event
+$deleteEvent = $conn->prepare("DELETE FROM events WHERE event_id = ?");
+$deleteEvent->bind_param("i", $event_id);
+
+if ($deleteEvent->execute()) {
+    $deleteEvent->close();
+    $conn->close();
+    header("Location: events.php");
+    exit;
 } else {
-    echo "Error: " . $stmt->error;
+    echo "Error: " . $deleteEvent->error;
+    $deleteEvent->close();
+    $conn->close();
 }
-
-
-$stmt->close();
-$conn->close();
-header("Location: events.php");
-
-?>

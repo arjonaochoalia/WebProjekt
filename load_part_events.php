@@ -11,8 +11,25 @@
         require 'db_connection.php';
 
         // Fetch all events
-        $sql = "SELECT event_id, admin_id, title, description, location, event_date, event_time, image_path FROM events";
-        $result = $conn->query($sql);
+        $user_id = $_SESSION['user_id'];
+
+        $stmt = $conn->prepare("SELECT events.event_id, 
+            events.admin_id, 
+            events.title, 
+            events.description, 
+            events.location, 
+            events.event_date, 
+            events.event_time, 
+            events.image_path
+                FROM events
+                JOIN user_events ON events.event_id = user_events.event_id
+                WHERE user_events.user_id = ? 
+                AND user_events.is_participating = 1");
+
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {

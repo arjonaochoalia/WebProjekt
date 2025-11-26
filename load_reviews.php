@@ -26,17 +26,17 @@ if (session_status() == PHP_SESSION_NONE) {
                 <div class="col-12 col-md-8 col-lg-6 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <!-- Reviewer Name -->
+                            <!-- name of person who wrote the review -->
                             <h5 class="card-title">
                                 <?= htmlspecialchars($row['first_name']); ?>
                             </h5>
 
-                            <!-- Review Content -->
+                            <!-- display the text from database for review -->
                             <p class="card-text">
                                 <?= nl2br(htmlspecialchars($row['content'])); ?>
                             </p>
 
-                            <!-- Star Rating -->
+                            <!-- display stars rating -->
                             <p>
                                 <?php
                                 $rating = (int)$row['rating'];
