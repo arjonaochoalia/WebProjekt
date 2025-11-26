@@ -16,6 +16,7 @@
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-7">
+                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_role'] == 'admin' ): ?>
                 <form action="add_event.php" method="POST" enctype="multipart/form-data">
 
                     <div class="mb-3">
@@ -54,6 +55,9 @@
 
                     <button type="submit" name="submit" class="btn btn-success w-100">Save Event</button>
                 </form>
+                                <?php else: ?>
+                    <p class="text-center">Please <a href="login_page.php">login</a> with an admin account to post a review.</p>
+                <?php endif; ?>
             </div>
         </div>
     </div>

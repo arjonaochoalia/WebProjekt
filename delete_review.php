@@ -1,13 +1,13 @@
 <?php
 require 'db_connection.php';
 
-$sql = "DELETE FROM events WHERE event_id = ?";
+$sql = "DELETE FROM reviews WHERE review_id = ?";
 $stmt = $conn->prepare($sql);
 
-$stmt->bind_param("i", $_POST['event_id']);
+$stmt->bind_param("i", $_POST['review_id']);
 
 if ($stmt->execute()) {
-    echo "Event deleted successfully!";
+    echo "Review deleted successfully!";
 } else {
     echo "Error: " . $stmt->error;
 }
@@ -15,6 +15,6 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
-header("Location: events.php");
+header("Location: feedback.php");
 
 ?>

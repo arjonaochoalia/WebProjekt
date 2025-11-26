@@ -18,14 +18,36 @@
         <!-- Top section -->
         <div class="row">
 
-            <!-- Left column: Image -->
+            <!-- Display image -->
             <div class="col-md-4">
-                <img src="https://via.placeholder.com/300x300"
-                    class="img-fluid rounded border"
-                    alt="User Image">
+                <div class="card text-center shadow-sm p-3 mb-4 bg-white rounded">
+                    <!-- Profile Picture -->
+                    <div class="card-body">
+                        <?php include 'load_pp.php'; ?>
+
+                        <!-- Upload Form -->
+                        <form action="upload_pp.php" method="POST" enctype="multipart/form-data" class="mt-3">
+                            <div class="custom-file mb-3">
+                                <input type="file" class="custom-file-input" id="image_path" name="image_path" required>
+                                <label class="custom-file-label" for="image_path">Choose file</label>
+                            </div>
+                            <button type="submit" name="submit" class="btn btn-success btn-block">Upload</button>
+                        </form>
+                    </div>
+                </div>
             </div>
 
-            <!-- Right column: Display fields -->
+            <!-- script -->
+            <script>
+                document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+                    var fileName = document.getElementById("image_path").files[0].name;
+                    var nextSibling = e.target.nextElementSibling
+                    nextSibling.innerText = fileName
+                })
+            </script>
+
+
+            <!-- Right column: Information about user -->
             <div class="col-md-8">
 
                 <div class="mb-2">
@@ -53,8 +75,8 @@
         <!-- Bottom Section -->
         <div class="mt-4 p-3 border rounded">
             <h5>Additional Information</h5>
-            <p>TODO: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque 
-                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto 
+            <p>TODO: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
                 beatae vitae dicta sunt explicabo</p>
         </div>
 
