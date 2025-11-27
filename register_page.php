@@ -6,12 +6,12 @@
     <?php include "head_links.php" ?>
 </head>
 
-<body>
+<body style="background-color:#FFF2EF">
     <?php include 'nav.php' ?>
 
     <div class="container d-flex justify-content-center align-items-center text-center" style="height: 100vh;">
         <div class="col-6">
-            <form action="register.php" method="POST">
+            <form action="register.php" method="POST" class="border p-4">
                 <div class="form-group">
                     <label for="user-name">Username</label>
                     <input type="text" class="form-control" id="user-name" name="username"

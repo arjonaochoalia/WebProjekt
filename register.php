@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
 
     if ($stmt->execute()) {
         // successfull registration --> redirect login page with success message
-        $_SESSION['success_message'] = "Registration successful! Please log in.";
+        $_SESSION['register_message'] = "Registration successful! Please log in.";
         header("Location: login_page.php");
         exit();
     } else {

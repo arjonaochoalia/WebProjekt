@@ -10,12 +10,12 @@
     <?php include 'nav.php' ?>
     <div class="container mt-4">
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="feedback-header d-flex justify-content-between align-items-center mb-4">
             <h2 class="m-0">Reviews</h2>
 
             <?php if (isset($_SESSION['user_role'])) { ?>
 
-                <a href="add_review_page.php" class="btn btn-primary">
+                <a href="add_review_page.php" class="btn">
                     Add New
                 </a>
             <?php } ?>

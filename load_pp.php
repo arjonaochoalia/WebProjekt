@@ -23,5 +23,5 @@ $conn->close();
 if (!empty($image_path) && file_exists($image_path)) {
     echo '<img src="' . htmlspecialchars($image_path) . '" alt="Profile Picture" class="img-fluid">';
 } else {
-    echo '<img src="profile_pictures/default.png" alt="Default Profile Picture" class="img-fluid">';
+    echo '<img src="profile_pictures/placeholder.jpg" alt="Default Profile Picture" class="img-fluid">';
 }

@@ -1,6 +1,5 @@
 <?php
-ob_start();
-session_start(); 
+session_start();
 
 require 'db_connection.php'; // database connection
 
@@ -22,7 +21,8 @@ if (isset($_POST['submit'])) {
     $conn->close();
 
     if (!$fetch_success) {
-        echo "Email or password incorrect!";
+        $_SESSION['login_error_message'] = "Incorrect email or password.";
+        header("Location: /WebProjekt/login_page.php");
     } else {
         if (password_verify($password, $stored_hash)) {
 
@@ -37,8 +37,8 @@ if (isset($_POST['submit'])) {
             header("Location: /WebProjekt/profile.php");
             exit;
         } else {
-            echo "Invalid password.";
+            $_SESSION['login_error_message'] = "Incorrect email or password.";
+            header("Location: /WebProjekt/login_page.php");
         }
     }
 }
-?>

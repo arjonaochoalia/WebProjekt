@@ -19,7 +19,7 @@
                         <!-- form to let user change his profile picture-->
                         <form action="upload_pp.php" method="POST" enctype="multipart/form-data" class="mt-3">
                             <div class="custom-file mb-3">
-                                <input type="file" class="custom-file-input" id="image_path" name="image_path" required>
+                                <input type="file" accept=".jpg, .jpeg, image/jpeg" class="custom-file-input" id="image_path" name="image_path" required>
                                 <label class="custom-file-label" for="image_path">Choose file</label>
                             </div>
                             <button type="submit" name="submit" class="btn btn-success w-100">Upload</button>
@@ -56,19 +56,18 @@
 
         <!-- Section to load and display events that current user has as favorite-->
         <div class="container px-0 mt-5 border">
-            <h2 class="p-4 mb-4 bg-warning text-dark rounded">My Favourite Events</h2>
+            <h2 class="p-4 mb-4 bg-warning text-dark">My Favourite Events</h2>
             <div class="d-flex flex-wrap justify-content-between mb-5 ml-4">
                 <?php include 'load_favorite_events.php'; ?>
             </div>
         </div>
 
         <div class="container px-0 mt-5 border">
-            <h2 class="p-4 mb-4 bg-success text-white rounded">My Booked Events</h2>
+            <h2 class="p-4 mb-4 bg-success text-white">My Booked Events</h2>
             <div class="d-flex flex-wrap justify-content-between mb-5 ml-4">
                 <?php include 'load_part_events.php'; ?>
             </div>
         </div>
-
 
         <script>
             document.querySelector('.custom-file-input').addEventListener('change', function(e) {
@@ -77,8 +76,8 @@
                 nextSibling.innerText = fileName
             })
         </script>
-
-        <?php include "footer.php" ?>
+    </div>
+    <?php include "footer.php" ?>
 </body>
 
 </html>

@@ -12,12 +12,16 @@
     //the following is only displayed when a user is redirected
     //from the registration page to login page
     //after successfully registering
-    if (isset($_SESSION['success_message'])) {
-        echo '<p class="alert alert-success">' . $_SESSION['success_message'] . '</p>';
-        unset($_SESSION['success_message']);
+    if (isset($_SESSION['register_message'])) {
+        echo '<p class="alert alert-success">' . $_SESSION['register_message'] . '</p>';
+        unset($_SESSION['register_message']);
+    }
+    //same but for error when password or email was incorrect
+    if (isset($_SESSION['login_error_message'])) {
+        echo '<p class="alert alert-danger">' . $_SESSION['login_error_message'] . '</p>';
+        unset($_SESSION['login_error_message']);
     }
     ?>
-
 
 
     <div class="container d-flex justify-content-center align-items-center text-center" style="min-height: 100vh;">

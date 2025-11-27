@@ -31,6 +31,26 @@
                                 <strong>Date:</strong> <?php echo $row["event_date"]; ?><br>
                                 <strong>Time:</strong> <?php echo $row["event_time"]; ?><br>
                                 <strong>Location:</strong> <?php echo $row["location"]; ?>
+                                <strong>Members:</strong>
+                                <?php
+                                // Fetch number of participating users
+                                $sql = "SELECT COUNT(*) AS total 
+                                        FROM user_events 
+                                        WHERE event_id = ? 
+                                        AND is_participating = 1";
+
+                                $stmt = $conn->prepare($sql);
+                                $stmt->bind_param("i", $row["event_id"]);
+                                $stmt->execute();
+
+                                $stmt->bind_result($count);
+                                $stmt->fetch();
+
+                                //set count 0 if we didnt fetch anything from database
+                                echo $count > 0 ? $count : "0";
+
+                                $stmt->close();
+                                ?>
                             </p>
                         </div>
 

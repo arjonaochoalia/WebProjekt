@@ -13,7 +13,7 @@ if (session_status() == PHP_SESSION_NONE) {
         require 'db_connection.php';
 
         // Fetch reviews with user info
-        $sql = "SELECT r.review_id, r.user_id, r.content, r.rating, r.created_at, u.first_name, u.user_role 
+        $sql = "SELECT r.review_id, r.user_id, r.content, r.rating, r.created_at, u.first_name, u.last_name, u.user_role 
                     FROM reviews r
                     JOIN users u ON r.user_id = u.user_id
                     ORDER BY r.created_at DESC";
@@ -24,13 +24,16 @@ if (session_status() == PHP_SESSION_NONE) {
             while ($row = $result->fetch_assoc()):
         ?>
                 <div class="col-12 col-md-8 col-lg-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <!-- name of person who wrote the review -->
+                    <div class="card review-card">
+                        <div class="card-header text-white d-flex">
                             <h5 class="card-title">
-                                <?= htmlspecialchars($row['first_name']); ?>
+                                <?= htmlspecialchars($row['first_name'] . " " . $row['last_name']); ?>
                             </h5>
-
+                            <p class="text-muted ml-auto" style="font-size:0.9em;">
+                                <?= date('d.m.Y', strtotime($row['created_at'])); ?>
+                            </p>
+                        </div>
+                        <div class="card-body">
                             <!-- display the text from database for review -->
                             <p class="card-text">
                                 <?= nl2br(htmlspecialchars($row['content'])); ?>
@@ -44,11 +47,6 @@ if (session_status() == PHP_SESSION_NONE) {
                                 for ($i = $rating; $i < 5; $i++) echo '<span class="star gray">★</span>';
                                 ?>
                             </p>
-
-                            <!-- Review Date -->
-                            <p class="text-muted" style="font-size:0.9em;">
-                                <?= date('d.m.Y H:i', strtotime($row['created_at'])); ?>
-                            </p>
                         </div>
 
                         <?php
@@ -58,7 +56,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             <div class="card-footer">
                                 <form action="delete_review.php" method="POST">
                                     <input type="hidden" name="review_id" value="<?= $row['review_id']; ?>">
-                                    <button type="submit" class="btn btn-danger">Delete Review</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>
                             </div>
                         <?php endif; ?>

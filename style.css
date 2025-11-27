@@ -24,3 +24,64 @@
 .custom-file-label {
     text-align: left !important;
 }
+
+
+
+/* -----------------------------------------------------------*/
+/* -------------------------NAVBAR----------------------------*/
+/* -----------------------------------------------------------*/
+.modern-navbar {
+    background-color: #557A76 !important;
+    padding: 1.2rem 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modern-navbar .navbar-nav .nav-link {
+    color: #F0EFE3 !important;
+    transition: all 0.3s ease;
+}
+
+.modern-navbar .navbar-nav .nav-link:hover {
+    color: #B76E79 !important;
+}
+
+.modern-navbar .navbar-nav .nav-link.active {
+    color: #B76E79 !important;
+    border-bottom: 3px solid #8AA89C;
+}
+
+.modern-navbar .login-btn,
+.modern-navbar .logout-btn {
+    padding: 0.5rem 1rem !important;
+    margin-left: 10px;
+    border: 1px solid #B76E79;
+    border-radius: 20px;
+}
+
+.modern-navbar .login-btn:hover,
+.modern-navbar .logout-btn:hover {
+    background-color: #B76E79;
+    color: #557A76 !important;
+    border-color: #B76E79;
+}
+
+.modern-footer {
+    background-color: #4C6A67 !important;
+}
+
+.review-card .card-header {
+    background-color: #8AA89C;
+    color: #557A76;
+    font-weight: bold;
+}
+
+.feedback-header .btn, .event-header .btn {
+    background-color: #455c56;
+    color: white;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.feedback-header .btn:hover, .event-header .btn:hover {
+    background-color: #557A76;
+}
