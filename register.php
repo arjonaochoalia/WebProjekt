@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db_connection.php'; // connect to database
+mysqli_report(MYSQLI_REPORT_OFF); // disable exceptions
 
 if (isset($_POST['submit'])) {
     $username   = $_POST['username'];
@@ -23,7 +24,7 @@ if (isset($_POST['submit'])) {
         header("Location: login_page.php");
         exit();
     } else {
-        echo "Error: " . $stmt->error;
+        echo "error";
     }
 
     $stmt->close();

@@ -29,7 +29,7 @@
             <div class="card shadow-lg rounded-lg p-5">
                 <!-- this if clause checks if the user is already logged in when being redirected to the login page
                     if user is logged in, he will only be shown a message with a link back to dashboard -->
-                <?php if (!isset($_SESSION['user_id'])): ?>
+                <?php if (!isset($_SESSION['user_id'])):  ?>
                     <h2 class="text-center mb-4">Login</h2>
                     <form action="login.php" method="POST">
                         <div class="form-group">

@@ -32,6 +32,5 @@ if (isset($_POST['submit'])) {
     } else {
         echo "Error: " . $stmt->error;
     }
-
     $stmt->close();
 }
