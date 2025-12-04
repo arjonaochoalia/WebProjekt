@@ -7,8 +7,12 @@
 </head>
 
 <body>
-    <?php include 'nav.php'; ?>
-
+    <?php include 'nav.php';
+    if (isset($_SESSION['review_error_message'])) {
+        echo '<p class="alert alert-danger">' . $_SESSION['review_error_message'] . '</p>';
+        unset($_SESSION['review_error_message']);
+    }
+    ?>
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-5">
@@ -18,7 +22,7 @@
                     <form action="add_review.php" method="POST">
                         <div class="mb-3">
                             <label class="form-label">Your Review</label>
-                            <textarea name="review_content" class="form-control" rows="4" placeholder="Write your review here..." required></textarea>
+                            <textarea name="review_content" class="form-control" rows="4" placeholder="Write your review here..."></textarea>
                         </div>
 
                         <input type="hidden" name="user_id" value="<?= $_SESSION['user_id']; ?>">
