@@ -16,6 +16,7 @@ if ($result && $result->num_rows > 0) {
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">User Role</th>
+                <th scope="col">Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,18 @@ if ($result && $result->num_rows > 0) {
                     <td><?php echo htmlspecialchars($row["last_name"]); ?></td>
                     <td><?php echo htmlspecialchars($row["email"]); ?></td>
                     <td><?php echo htmlspecialchars($row["user_role"]); ?></td>
+                    <td>
+                        <?php
+                        if ($row["user_role"] != "admin") {
+                        ?>
+                            <form action="delete_user.php" method="POST" class="d-inline">
+                                <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($row["user_id"]); ?>">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                            <?php
+                        }
+                            ?>
+                    </td>
                 </tr>
             <?php
             } // End of the while loop

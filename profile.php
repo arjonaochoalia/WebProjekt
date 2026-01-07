@@ -7,7 +7,12 @@
 </head>
 
 <body>
-    <?php include 'nav.php' ?>
+    <?php include 'nav.php';
+    if (isset($_SESSION['user_deleted_message'])) {
+        echo '<p class="alert alert-success">' . $_SESSION['user_deleted_message'] . '</p>';
+        unset($_SESSION['user_deleted_message']);
+    }
+    ?>
     <div class="container mt-4">
 
         <div class="row">
