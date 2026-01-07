@@ -16,7 +16,7 @@
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-
+                //if event entry in database has NULL in image_path we give it a default path
                 $image = !empty($row['image_path']) ? $row['image_path'] : "Bilder/Placeholder.jpg";
         ?>
 

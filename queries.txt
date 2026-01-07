@@ -1,3 +1,2 @@
 TODO
-- Add Event form Validation, prefill Input fields
-- fix Floating footer, add Event page
+- 
