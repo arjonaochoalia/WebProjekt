@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $currentPage = basename($_SERVER['PHP_SELF']); //current page
 ?>
 
@@ -26,7 +28,7 @@ $currentPage = basename($_SERVER['PHP_SELF']); //current page
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             <?php else: ?>
-                <a class="nav-item nav-link login-btn <?= $currentPage === 'login_page.php' ? 'active' : '' ?>" href="login_page.php">
+                <a class="nav-item nav-link login-btn <?= $currentPage === 'login.php' ? 'active' : '' ?>" href="login.php">
                     <i class="fas fa-sign-in-alt"></i> Login <span class="sr-only">(current)</span>
                 </a>
             <?php endif; ?>
