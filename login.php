@@ -105,7 +105,7 @@ if (isset($_POST['submit'])) {
                     <div class="mt-3">
                         <p>
                             Don't have an account?
-                            <a href="register_page.php" class="text-decoration-none">Sign up here</a>
+                            <a href="register.php" class="text-decoration-none">Sign up here</a>
                         </p>
                     </div>
 

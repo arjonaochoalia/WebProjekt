@@ -30,58 +30,70 @@
 /* -----------------------------------------------------------*/
 /* -------------------------NAVBAR----------------------------*/
 /* -----------------------------------------------------------*/
+:root {
+    --main-bg-color: #569ced;
+    --dark-bg-color: #3c85d8;
+    --light-text: #F0EFE3;
+    --secondary-sage: #8AA89C;
+    --btn-dark-green: #455c56;
+    --accent-color: #ffaa00;
+}
+
+/* --- UPDATED STYLES --- */
+
 .modern-navbar {
-    background-color: #557A76 !important;
+    background-color: var(--main-bg-color) !important;
     padding: 1.2rem 1rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .modern-navbar .navbar-nav .nav-link {
-    color: #F0EFE3 !important;
+    color: var(--light-text) !important;
     transition: all 0.3s ease;
 }
 
 .modern-navbar .navbar-nav .nav-link:hover {
-    color: #B76E79 !important;
+    color: var(--accent-color) !important;
 }
 
 .modern-navbar .navbar-nav .nav-link.active {
-    color: #B76E79 !important;
-    border-bottom: 3px solid #8AA89C;
+    color: var(--accent-color) !important;
+    border-bottom: 3px solid var(--secondary-sage);
 }
 
 .modern-navbar .login-btn,
 .modern-navbar .logout-btn {
     padding: 0.5rem 1rem !important;
     margin-left: 10px;
-    border: 1px solid #B76E79;
+    border: 1px solid var(--accent-color);
     border-radius: 20px;
 }
 
 .modern-navbar .login-btn:hover,
 .modern-navbar .logout-btn:hover {
-    background-color: #B76E79;
-    color: #557A76 !important;
-    border-color: #B76E79;
+    color: var(--main-bg-color) !important;
+    border-color: var(--accent-color);
 }
 
 .modern-footer {
-    background-color: #4C6A67 !important;
+    background-color: var(--dark-bg-color) !important;
 }
 
 .review-card .card-header {
-    background-color: #8AA89C;
-    color: #557A76;
+    background-color: var(--secondary-sage);
+    color: var(--main-bg-color);
     font-weight: bold;
 }
 
-.feedback-header .btn, .event-header .btn {
-    background-color: #455c56;
+.feedback-header .btn,
+.event-header .btn {
+    background-color: var(--btn-dark-green);
     color: white;
     font-weight: 500;
     transition: background-color 0.3s ease;
 }
 
-.feedback-header .btn:hover, .event-header .btn:hover {
-    background-color: #557A76;
+.feedback-header .btn:hover,
+.event-header .btn:hover {
+    background-color: var(--main-bg-color);
 }

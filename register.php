@@ -68,7 +68,7 @@ if (isset($_POST['submit'])) {
                 </div>
             <?php endif; ?>
 
-            <form action="" method="POST" class="border p-4 bg-white shadow-sm rounded">
+            <form action="" method="POST" class="border p-4 mt-4 bg-white shadow-sm rounded">
                 <h2 class="mb-4">Sign Up</h2>
 
                 <div class="form-group text-start">
@@ -97,7 +97,7 @@ if (isset($_POST['submit'])) {
                         placeholder="Enter your last name" required>
                 </div>
 
-                <button type="submit" name="submit" class="btn btn-primary w-100 mt-3">Sign up</button>
+                <button type="submit" name="submit" class="btn btn-primary w-25 mt-3">Sign up</button>
             </form>
 
             <div class="mt-3">
