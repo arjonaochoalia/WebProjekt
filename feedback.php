@@ -1,5 +1,13 @@
 <?php
-session_start();
+// =================================================================
+// PHP LOGIC
+// =================================================================
+
+// Start session safely
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require 'db_connection.php';
 
 // Initialize variables for the form

@@ -2,6 +2,7 @@
 session_start();
 require 'db_connection.php';
 
+//delete review
 $deleteReview = $conn->prepare("DELETE FROM reviews WHERE review_id = ?");
 $deleteReview->bind_param("i", $_POST['review_id']);
 
@@ -11,6 +12,7 @@ if ($deleteReview->execute()) {
     $deleteReview->close();
     $conn->close();
     header("Location: feedback.php");
+    exit();
 } else {
     echo "Error: " . $deleteReview->error;
     $deleteReview->close();

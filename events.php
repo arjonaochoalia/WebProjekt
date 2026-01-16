@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require 'db_connection.php';
 
-// Initialize variables
+// Initialize variables used for events
 $event_title = "";
 $description = "";
 $location = "";

@@ -21,7 +21,7 @@ if ($deleteEvent->execute()) {
     $deleteEvent->close();
     $conn->close();
     header("Location: events.php");
-    exit;
+    exit();
 } else {
     echo "Error: " . $deleteEvent->error;
     $deleteEvent->close();
