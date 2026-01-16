@@ -74,7 +74,7 @@ if (isset($_POST['submit_review'])) {
     </style>
 </head>
 
-<body style="background-color:#FFF2EF">
+<body>
     <?php include 'nav.php' ?>
 
     <div class="container mt-4">
@@ -90,7 +90,7 @@ if (isset($_POST['submit_review'])) {
         <?php endif; ?>
         <div class="row justify-content-center mb-5">
             <div class="col-12 col-md-8 col-lg-6">
-                <div class="card shadow-sm">
+                <div class="card shadow-sm border border-2 border-secondary">
                     <div class="card-body">
                         <h4 class="card-title text-center mb-3">Leave a Review</h4>
 

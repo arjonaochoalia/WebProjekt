@@ -80,7 +80,7 @@ if (isset($_POST['submit_event'])) {
     <?php include 'head_links.php'; ?>
 </head>
 
-<body style="background-color:#FFF2EF">
+<body>
     <?php include 'nav.php' ?>
 
     <div class="container mt-4">
@@ -98,7 +98,7 @@ if (isset($_POST['submit_event'])) {
         <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'): ?>
             <div class="row justify-content-center mb-5">
                 <div class="col-12 col-md-10 col-lg-8">
-                    <div class="card shadow-sm border-0">
+                    <div class="card shadow-sm border border-2 border-secondary">
                         <div class="card-header bg-primary text-white">
                             <h4 class="m-0"><i class="fa-solid fa-plus-circle"></i> Create New Event</h4>
                         </div>

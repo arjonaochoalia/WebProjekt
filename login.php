@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
     <?php include "head_links.php" ?>
 </head>
 
-<body style="background-color:#FFF2EF">
+<body>
     <?php include 'nav.php'; ?>
 
     <div class="container d-flex justify-content-center align-items-center text-center" style="min-height: 100vh;">
