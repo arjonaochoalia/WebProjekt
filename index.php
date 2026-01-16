@@ -6,7 +6,7 @@
     <?php include "head_links.php" ?>
 </head>
 
-<body style="background-color:#FFF2EF">
+<body>
     <?php include 'nav.php' ?>
 
 
