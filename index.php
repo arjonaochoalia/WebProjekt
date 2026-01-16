@@ -9,7 +9,6 @@
 <body style="background-color:#FFF2EF">
     <?php include 'nav.php' ?>
 
-
     <!--Beauty Lab-->
     <section>
         <div class="container text-center py-5">

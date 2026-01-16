@@ -1,20 +1,16 @@
 <?php
 require 'db_connection.php';
 
-$sql = "DELETE FROM reviews WHERE review_id = ?";
-$stmt = $conn->prepare($sql);
+$deleteReview = $conn->prepare("DELETE FROM reviews WHERE review_id = ?");
+$deleteReview->bind_param("i", $_POST['review_id']);
 
-$stmt->bind_param("i", $_POST['review_id']);
-
-if ($stmt->execute()) {
-    echo "Review deleted successfully!";
+// if successful back to review page
+if ($deleteReview->execute()) {
+    $deleteReview->close();
+    $conn->close();
+    header("Location: feedback.php");
 } else {
-    echo "Error: " . $stmt->error;
+    echo "Error: " . $deleteReview->error;
+    $deleteReview->close();
+    $conn->close();
 }
-
-
-$stmt->close();
-$conn->close();
-header("Location: feedback.php");
-
-?>
