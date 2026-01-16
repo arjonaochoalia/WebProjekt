@@ -79,8 +79,14 @@ if (isset($_POST['submit_review'])) {
 
     <div class="container mt-4">
 
-
-        <?php if (isset($_SESSION['success_review_message'])): ?>
+        <?php
+        if (isset($_SESSION['review_deleted_message'])) {
+            echo '<p class="alert alert-success">' . $_SESSION['review_deleted_message'] . '</p>';
+            unset($_SESSION['review_deleted_message']);
+        }
+        ?>
+        <?php 
+        if (isset($_SESSION['success_review_message'])): ?>
             <p class="alert alert-success">
                 <?php
                 echo $_SESSION['success_review_message'];
