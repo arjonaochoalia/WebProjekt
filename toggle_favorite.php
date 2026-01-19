@@ -5,7 +5,7 @@ require 'db_connection.php';
 //exit if user not logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
-    exit;
+    exit();
 }
 
 $user_id = $_SESSION['user_id'];
@@ -42,4 +42,4 @@ if ($result->num_rows > 0) {
 }
 
 header('Location: events.php');
-exit;
+exit();

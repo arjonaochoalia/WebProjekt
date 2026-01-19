@@ -1,3 +1,4 @@
+<!--top navigation bar-->
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

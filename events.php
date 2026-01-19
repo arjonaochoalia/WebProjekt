@@ -42,7 +42,7 @@ if (isset($_POST['submit_event'])) {
     if (empty($event_date))  $errorMessages[] = "Please select an event date.";
     if (empty($event_time))  $errorMessages[] = "Please select an event time.";
 
-    // Save to Database if no errors
+    // Add event in database if no errors
     if (empty($errorMessages)) {
         $image_path = null;
         if (!empty($_FILES["image_path"]["name"])) {
@@ -50,24 +50,23 @@ if (isset($_POST['submit_event'])) {
             move_uploaded_file($_FILES["image_path"]["tmp_name"], $image_path);
         }
 
-        $sql = "INSERT INTO events (admin_id, title, description, location, event_date, event_time, image_path, created_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
+        $add_event = $conn->prepare("INSERT INTO events (admin_id, title, description, location, event_date, event_time, image_path, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+        $add_event->bind_param("issssss", $admin_id, $event_title, $description, $location, $event_date, $event_time, $image_path);
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("issssss", $admin_id, $event_title, $description, $location, $event_date, $event_time, $image_path);
-
-        if ($stmt->execute()) {
+        if ($add_event->execute()) {
             // Set success message in session
             $_SESSION['success_event_message'] = "Event created successfully!";
+            $add_event->close();
             header("Location: events.php");
             exit();
         } else {
-            $errorMessages[] = "Database error: " . $stmt->error;
+            $errorMessages[] = "Database error: " . $add_event->error;
         }
-        $stmt->close();
     }
-}
+} // Handle Form Submission End
 ?>
+
 <!-- =================================================================
 // HTML STRUCTURE
 // ================================================================= -->
@@ -85,77 +84,108 @@ if (isset($_POST['submit_event'])) {
 
     <div class="container mt-4">
 
+        <!-- "Event deleted" alert message-->
+        <?php if (isset($_SESSION['event_deleted_message'])): ?>
+            <div class="alert alert-success">
+                <?= $_SESSION['event_deleted_message'] ?>
+            </div>
+            <?php unset($_SESSION['event_deleted_message']); ?>
+        <?php endif; ?>
+
+        <!-- "Event added" alert message-->
         <?php if (isset($_SESSION['success_event_message'])): ?>
-            <p class="alert alert-success">
-                <?php
-                echo $_SESSION['success_event_message'];
-                unset($_SESSION['success_event_message']);
-                ?>
-            </p>
+            <div class="alert alert-success">
+                <?= $_SESSION['success_event_message'] ?>
+            </div>
+            <?php unset($_SESSION['success_event_message']); ?>
         <?php endif; ?>
 
 
-        <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'): ?>
-            <div class="row justify-content-center mb-5">
-                <div class="col-12 col-md-10 col-lg-8">
-                    <div class="card shadow-sm border border-2 border-secondary">
-                        <div class="card-header bg-primary text-white">
-                            <h4 class="m-0"><i class="fa-solid fa-plus-circle"></i> Create New Event</h4>
-                        </div>
-                        <div class="card-body">
+        <!-- "Create New Event"-form for admins -->
+        <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
 
-                            <?php if (!empty($errorMessages)): ?>
-                                <div class="alert alert-danger">
-                                    <ul class="mb-0 pl-3">
-                                        <?php foreach ($errorMessages as $msg) echo "<li>$msg</li>"; ?>
-                                    </ul>
-                                </div>
-                            <?php endif; ?>
+            <!-- Button to fold form in and out -->
+            <div class="text-center mb-4">
+                <button class="btn btn-secondary"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#createEventForm"
+                    aria-expanded="<?= !empty($errorMessages) ? 'true' : 'false' ?>"
+                    aria-controls="createEventForm">
+                    <i class="fa-solid fa-plus-circle"></i> "Create New Event" form
+                </button>
+            </div>
 
-                            <form action="events.php" method="POST" enctype="multipart/form-data">
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold">Event Title</label>
-                                    <input type="text" name="title" value="<?php echo htmlspecialchars($event_title); ?>" class="form-control" placeholder="e.g. Summer Festival">
-                                </div>
+            <!-- Collapsible Form -->
+            <div class="collapse mb-5 <?php if (!empty($errorMessages)) echo 'show'; ?>" id="createEventForm">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10 col-lg-8">
+                        <div class="card shadow-sm border border-2 border-secondary">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="m-0">Create New Event</h4>
+                            </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold">Description</label>
-                                    <textarea name="description" class="form-control" rows="3" placeholder="Describe the event..."><?php echo htmlspecialchars($description); ?></textarea>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold">Location</label>
-                                    <input type="text" name="location" value="<?php echo htmlspecialchars($location); ?>" class="form-control" placeholder="e.g. Central Park">
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Date</label>
-                                        <input type="date" name="event_date" value="<?php echo htmlspecialchars($event_date); ?>" class="form-control">
+                            <div class="card-body">
+                                <!-- error messages incase of invalid form -->
+                                <?php if (!empty($errorMessages)): ?>
+                                    <div class="alert alert-danger">
+                                        <ul class="mb-0 pl-3">
+                                            <?php foreach ($errorMessages as $msg): ?>
+                                                <li><?= $msg ?></li>
+                                            <?php endforeach; ?>
+                                        </ul>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Time</label>
-                                        <input type="time" name="event_time" value="<?php echo htmlspecialchars($event_time); ?>" class="form-control">
+                                <?php endif; ?>
+
+                                <!-- "Create Event" form information -->
+                                <form action="events.php" method="POST" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label for="event_title" class="form-label fw-bold">Event Title</label>
+                                        <input type="text" id="event_title" name="title" value="<?php echo htmlspecialchars($event_title); ?>" class="form-control" placeholder="e.g. Summer Festival">
                                     </div>
-                                </div>
 
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold">Event Image</label>
-                                    <input type="file" name="image_path" class="form-control">
-                                </div>
+                                    <div class="mb-3">
+                                        <label for="event_description" class="form-label fw-bold">Description</label>
+                                        <textarea id="event_description" name="description" class="form-control" rows="3" placeholder="Describe the event..."><?php echo htmlspecialchars($description); ?></textarea>
+                                    </div>
 
-                                <button type="submit" name="submit_event" class="btn btn-success w-100">
-                                    <i class="fa-solid fa-check"></i> Publish Event
-                                </button>
-                            </form>
+                                    <div class="mb-3">
+                                        <label for="event_location" class="form-label fw-bold">Location</label>
+                                        <input type="text" id="event_location" name="location" value="<?php echo htmlspecialchars($location); ?>" class="form-control" placeholder="e.g. Central Park">
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="event_date" class="form-label fw-bold">Date</label>
+                                            <input type="date" id="event_date" name="event_date" value="<?php echo htmlspecialchars($event_date); ?>" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="event_time" class="form-label fw-bold">Time</label>
+                                            <input type="time" id="event_time" name="event_time" value="<?php echo htmlspecialchars($event_time); ?>" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="event_image" class="form-label fw-bold">Event Image</label>
+                                        <input type="file" id="event_image" name="image_path" class="form-control">
+                                    </div>
+
+                                    <button type="submit" name="submit_event" class="btn btn-success w-50 mx-auto d-block">
+                                        <i class="fa-solid fa-check"></i> Publish Event
+                                    </button>
+                                </form>
+                            </div> <!--card-body end-->
+
                         </div>
                     </div>
                 </div>
             </div>
-            <hr class="my-5">
-        <?php endif; ?>
+
+            <hr class="my-5 hr-dark"> <!-- line for visual separation between form and posted events -->
+        <?php endif; ?> <!-- "Create New Event"-form End -->
 
 
+        <!-- Posted events -->
         <div class="event-header mb-4">
             <h2 class="m-0">Upcoming Events</h2>
         </div>
@@ -169,7 +199,7 @@ if (isset($_POST['submit_event'])) {
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $image = !empty($row['image_path']) ? $row['image_path'] : "Bilder/Placeholder.jpg";
-                    $event_id = $row['event_id'];
+                    $event_id = $row['event_id']; //ID of the event being fetched
 
                     // Prepare Participation Count
                     $count_sql = "SELECT COUNT(*) AS total FROM user_events WHERE event_id = ? AND is_participating = 1";
@@ -200,10 +230,13 @@ if (isset($_POST['submit_event'])) {
                     }
             ?>
 
+                    <!--Event card-->
                     <div class="col-12 col-sm-6 col-md-4 mb-4">
                         <div class="card h-100 shadow-sm">
+                            <!--Event image in card-->
                             <img class="card-img-top" src="<?php echo $image; ?>" alt="Event Image" style="height: 200px; object-fit: cover;">
 
+                            <!--Event information in card-->
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($row["title"]); ?></h5>
                                 <p class="card-text text-muted small"><?php echo nl2br(htmlspecialchars(substr($row["description"], 0, 100))) . '...'; ?></p>
@@ -216,9 +249,12 @@ if (isset($_POST['submit_event'])) {
                                 </ul>
                             </div>
 
+                            <!--Personal event information (participating/favorite)-->
                             <div class="card-footer bg-white border-top-0">
                                 <?php if (isset($_SESSION['user_id'])): ?>
                                     <div class="d-flex justify-content-between align-items-center">
+
+                                        <!--Favorite/Participating button-->
                                         <div>
                                             <form method="POST" action="toggle_favorite.php" class="d-inline">
                                                 <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
@@ -235,6 +271,7 @@ if (isset($_POST['submit_event'])) {
                                             </form>
                                         </div>
 
+                                        <!--Delete Event button (only if creator of this event)-->
                                         <?php if ($_SESSION['user_id'] == $row["admin_id"]): ?>
                                             <form action="delete_event.php" method="POST" class="d-inline">
                                                 <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
@@ -244,15 +281,16 @@ if (isset($_POST['submit_event'])) {
                                             </form>
                                         <?php endif; ?>
                                     </div>
+
                                 <?php else: ?>
                                     <a href="login.php" class="btn btn-primary btn-sm w-100">Login to Join</a>
                                 <?php endif; ?>
                             </div>
                         </div>
-                    </div>
+                    </div> <!--Event card end-->
 
             <?php
-                }
+                } //end of fetching-loop
             } else {
                 echo "<div class='col-12 text-center'><p class='text-muted'>No events found.</p></div>";
             }

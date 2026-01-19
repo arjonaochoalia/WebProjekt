@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'db_connection.php';
 
 $event_id = $_POST['event_id'];
@@ -18,6 +19,8 @@ $deleteEvent->bind_param("i", $event_id);
 
 // if successful back to event page
 if ($deleteEvent->execute()) {
+    // Set success message in session
+    $_SESSION['event_deleted_message'] = "Event deleted successfully!";
     $deleteEvent->close();
     $conn->close();
     header("Location: events.php");

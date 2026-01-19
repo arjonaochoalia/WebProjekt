@@ -8,6 +8,7 @@ $deleteReview->bind_param("i", $_POST['review_id']);
 
 // if successful back to review page
 if ($deleteReview->execute()) {
+    // Set success message in session
     $_SESSION['review_deleted_message'] = "Review deleted successfully!";
     $deleteReview->close();
     $conn->close();
