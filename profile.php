@@ -120,7 +120,9 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
             </div>
         </div>
 
-        <!-- User Management (only visible for admins)-->
+        <!-- =================================================================
+        // User Management (only visible for admins)
+        // ================================================================= -->
         <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') { ?>
             <div class="container px-0 mt-5 border p-3 bg-white">
                 <h3 class="mb-3">User Management</h3>
@@ -172,11 +174,14 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
             </div>
         <?php } ?>
 
-        <!-- Saved favorite events -->
+        <!-- =================================================================
+        // Saved favorite events
+        // ================================================================= -->
         <div class="container px-0 mt-5 border p-4 bg-light">
             <h2 class="mb-4 text-warning"><i class="fa-solid fa-star"></i> My Favourite Events</h2>
             <div class="row">
                 <?php
+                //fetch saved favorite event
                 $stmt = $conn->prepare("SELECT e.* FROM events e JOIN user_events ue ON e.event_id = ue.event_id WHERE ue.user_id = ? AND ue.is_favorite = 1");
                 $stmt->bind_param("i", $user_id);
                 $stmt->execute();
@@ -189,16 +194,19 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
                 ?>
                         <div class="col-12 col-sm-6 col-md-4 mb-4">
                             <div class="card h-100 shadow-sm">
+                                <!-- event image -->
                                 <img class="card-img-top" src="<?php echo $image; ?>" alt="Event Image" style="height: 200px; object-fit: cover;">
+                                <!-- event information -->
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo htmlspecialchars($row["title"]); ?></h5>
                                     <p class="card-text text-muted small"><?php echo nl2br(htmlspecialchars(substr($row["description"], 0, 100))) . '...'; ?></p>
                                     <p class="card-text small">
                                         <strong>Date:</strong> <?php echo $row["event_date"]; ?><br>
-                                        <strong>Time:</strong> <?php echo $row["event_time"]; ?><br>
+                                        <strong>Time:</strong> <?php echo substr($row["event_time"], 0, 5); ?><br>
                                         <strong>Location:</strong> <?php echo $row["location"]; ?>
                                     </p>
                                 </div>
+                                <!-- favorite symbol -->
                                 <div class="card-footer d-flex justify-content-between">
                                     <form method="POST" action="toggle_favorite.php" class="d-inline">
                                         <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
@@ -217,11 +225,14 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
             </div>
         </div>
 
-        <!-- Saved booked events -->
+        <!-- =================================================================
+        // Saved booked events
+        // ================================================================= -->
         <div class="container px-0 mt-5 border p-4 bg-light mb-5">
             <h2 class="mb-4 text-success"><i class="fa-solid fa-calendar-check"></i> My Booked Events</h2>
             <div class="row">
                 <?php
+                //fetch saved booked event
                 $stmt = $conn->prepare("SELECT e.* FROM events e JOIN user_events ue ON e.event_id = ue.event_id WHERE ue.user_id = ? AND ue.is_participating = 1");
                 $stmt->bind_param("i", $user_id);
                 $stmt->execute();
@@ -234,20 +245,23 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
                 ?>
                         <div class="col-12 col-sm-6 col-md-4 mb-4">
                             <div class="card h-100 shadow-sm">
+                                <!-- event image -->
                                 <img class="card-img-top" src="<?php echo $image; ?>" alt="Event Image" style="height: 200px; object-fit: cover;">
+                                <!-- event information -->
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo htmlspecialchars($row["title"]); ?></h5>
                                     <p class="card-text text-muted small"><?php echo nl2br(htmlspecialchars(substr($row["description"], 0, 100))) . '...'; ?></p>
                                     <p class="card-text small">
                                         <strong>Date:</strong> <?php echo $row["event_date"]; ?><br>
-                                        <strong>Time:</strong> <?php echo $row["event_time"]; ?><br>
+                                        <strong>Time:</strong> <?php echo substr($row["event_time"], 0, 5); ?><br>
                                         <strong>Location:</strong> <?php echo $row["location"]; ?>
                                     </p>
                                 </div>
+                                <!-- participation symbol -->
                                 <div class="card-footer d-flex justify-content-between">
                                     <form method="POST" action="toggle_participate.php" class="d-inline">
                                         <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
-                                        <button type="submit" class="btn btn-success btn-sm" title="Cancel Participation"><i class="fa-solid fa-check"></i> Going</button>
+                                        <button type="submit" class="btn btn-success btn-sm" title="Cancel Participation"><i class="fa-solid fa-check"></i> Participating</button>
                                     </form>
                                 </div>
                             </div>
@@ -262,7 +276,7 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
             </div>
         </div>
 
-
+        <!-- Change "Choose file" to chosen file name -->
         <script>
             document.querySelector('.custom-file-input').addEventListener('change', function(e) {
                 var fileName = document.getElementById("image_path").files[0].name;
