@@ -10,19 +10,13 @@ if (isset($_SESSION['register_message'])) {
     $success_message = $_SESSION['register_message'];
     unset($_SESSION['register_message']);
 }
-
-// Check for session error messages
-if (isset($_SESSION['login_error_message'])) {
-    $error_message = $_SESSION['login_error_message'];
-    unset($_SESSION['login_error_message']);
-}
-
 // --- LOGIC: HANDLE FORM SUBMISSION ---
 if (isset($_POST['submit'])) {
     require 'db_connection.php';
 
     $email    = $_POST['email'];
     $password = $_POST['password'];
+    $stored_hash = "";
 
     // fetch data from database
     $sql = "SELECT user_id, username, first_name, last_name, user_role, user_password 
@@ -81,11 +75,11 @@ if (isset($_POST['submit'])) {
                 <?php if (!isset($_SESSION['user_id'])): ?>
 
                     <h2 class="text-center mb-4">Login</h2>
-
+                    <!-- display message when registration was successful -->
                     <?php if (!empty($success_message)): ?>
                         <p class="alert alert-success"><?php echo $success_message; ?></p>
                     <?php endif; ?>
-
+                    <!-- display error if user credentials were invalid -->
                     <?php if (!empty($error_message)): ?>
                         <p class="alert alert-danger"><?php echo $error_message; ?></p>
                     <?php endif; ?>
@@ -108,7 +102,7 @@ if (isset($_POST['submit'])) {
                             <a href="register.php" class="text-decoration-none">Sign up here</a>
                         </p>
                     </div>
-
+                    <!-- display redirect if user is already logged in -->
                 <?php else: ?>
                     <p class="text-center">You are already logged in. Go to <a href="profile.php">Dashboard</a></p>
                 <?php endif; ?>
