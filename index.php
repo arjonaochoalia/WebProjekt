@@ -57,7 +57,7 @@
                     <br><br>
                     Take a moment to read through the feedback and let our community’s experiences guide and motivate you. Join us, get inspired, and see for yourself why Beauty Lab is a place where people learn, grow and feel empowered.
                 </p>
-                <a href="community.php" class="btn btn-primary mt-3">View Feedback</a>
+                <a href="feedback.php" class="btn btn-primary mt-3">View Feedback</a>
             </div>
             <div class="col-md-6 d-none d-md-block">
                 <img src="Bilder/home_section_three.jpg" class="img-fluid rounded shadow" alt="Community Picture" width=93%>

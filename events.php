@@ -112,7 +112,7 @@ if (isset($_POST['submit_event'])) {
                     data-target="#createEventForm"
                     aria-expanded="<?= !empty($errorMessages) ? 'true' : 'false' ?>"
                     aria-controls="createEventForm">
-                    <i class="fa-solid fa-plus-circle"></i> "Create New Event" form
+                    <i class="fa-solid fa-plus-circle"></i> Create New Event
                 </button>
             </div>
 
