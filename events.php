@@ -193,7 +193,10 @@ if (isset($_POST['submit_event'])) {
         <div class="row">
             <?php
             // Fetch all events
-            $sql = "SELECT event_id, admin_id, title, description, location, event_date, event_time, image_path FROM events ORDER BY event_date ASC";
+            $sql = "SELECT event_id, admin_id, title, description, location, event_date, event_time, image_path 
+            FROM events 
+            ORDER BY event_date ASC";
+
             $result = $conn->query($sql);
 
             if ($result && $result->num_rows > 0) {
@@ -214,9 +217,8 @@ if (isset($_POST['submit_event'])) {
                     $isParticipating = 0;
                     $isFavorite = 0;
                     if (isset($_SESSION['user_id'])) {
-                        // We need a fresh connection or statement for inner queries
-                        // Note: Because we are inside a fetch_assoc loop, we must be careful with prepared statements.
-                        // The cleanest way is to use a new statement variable.
+
+                        // Second statement for fetching participating and favorite values for current user and current event
                         $status_sql = "SELECT is_participating, is_favorite FROM user_events WHERE user_id = ? AND event_id = ?";
                         $stmt2 = $conn->prepare($status_sql);
                         $stmt2->bind_param("ii", $_SESSION['user_id'], $event_id);

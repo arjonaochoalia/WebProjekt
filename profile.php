@@ -1,11 +1,11 @@
 <?php
 // =================================================================
-// SECTION 1: PHP LOGIC (SECURITY, UPLOADS, FETCH USER)
+// PHP LOGIC (SECURITY, UPLOADS, FETCH USER)
 // =================================================================
 
 session_start();
 
-// 1. Security Check
+// Security Check
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -16,15 +16,17 @@ $user_id = $_SESSION['user_id'];
 $message = "";
 
 // -----------------------------------------------------------------
-// LOGIC: HANDLE IMAGE UPLOAD
+//  HANDLE IMAGE UPLOAD
 // -----------------------------------------------------------------
 if (isset($_POST['submit_image'])) {
 
+    //create target path for image
     if (!empty($_FILES["image_path"]["name"])) {
         $original_filename = basename($_FILES["image_path"]["name"]);
         $target_dir = "profile_pictures/";
         $target_file = $target_dir . $user_id . "_profile_picture_" . $original_filename;
 
+        //move file to target folder and upload it to the database
         if (move_uploaded_file($_FILES["image_path"]["tmp_name"], $target_file)) {
             $sql = "UPDATE users SET image_path = ? WHERE user_id = ?";
             $stmt = $conn->prepare($sql);
@@ -43,7 +45,7 @@ if (isset($_POST['submit_image'])) {
 }
 
 // -----------------------------------------------------------------
-// LOGIC: FETCH CURRENT IMAGE
+// FETCH CURRENT IMAGE
 // -----------------------------------------------------------------
 $sql_fetch = "SELECT image_path FROM users WHERE user_id = ?";
 $stmt_fetch = $conn->prepare($sql_fetch);
@@ -59,6 +61,10 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
 }
 ?>
 
+<!-- =================================================================
+// HTML STRUCTURE
+// ================================================================= -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,6 +78,7 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
 
     <div class="container mt-4">
 
+        <!-- "User deleted" alert message-->
         <?php
         if (isset($_SESSION['user_deleted_message'])) {
             echo '<p class="alert alert-success">' . $_SESSION['user_deleted_message'] . '</p>';
@@ -80,7 +87,9 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
         echo $message;
         ?>
 
+        <!-- profile picture and personal information -->
         <div class="row">
+            <!-- profile picture and file upload -->
             <div class="col-md-4">
                 <div class="card text-center shadow-sm p-3 mb-4 bg-white rounded">
                     <div class="card-body">
@@ -96,6 +105,7 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
                 </div>
             </div>
 
+            <!-- personal information -->
             <div class="col-md-8">
                 <div class="card shadow-sm p-3 mb-4 bg-white rounded">
                     <div class="card-body">
@@ -110,6 +120,7 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
             </div>
         </div>
 
+        <!-- User Management (only visible for admins)-->
         <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') { ?>
             <div class="container px-0 mt-5 border p-3 bg-white">
                 <h3 class="mb-3">User Management</h3>
@@ -119,6 +130,7 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
 
                 if ($result && $result->num_rows > 0) {
                 ?>
+                    <!-- User table -->
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -160,7 +172,7 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
             </div>
         <?php } ?>
 
-
+        <!-- Saved favorite events -->
         <div class="container px-0 mt-5 border p-4 bg-light">
             <h2 class="mb-4 text-warning"><i class="fa-solid fa-star"></i> My Favourite Events</h2>
             <div class="row">
@@ -205,7 +217,7 @@ if (!empty($db_image_path) && file_exists($db_image_path)) {
             </div>
         </div>
 
-
+        <!-- Saved booked events -->
         <div class="container px-0 mt-5 border p-4 bg-light mb-5">
             <h2 class="mb-4 text-success"><i class="fa-solid fa-calendar-check"></i> My Booked Events</h2>
             <div class="row">

@@ -15,10 +15,10 @@ $content = "";
 $rating = "";
 $errorMessages = [];
 
-// --- SECTION 1: HANDLE FORM SUBMISSION ---
+// handle form submission
 if (isset($_POST['submit_review'])) {
 
-    // Check if user is logged in
+    // if user is not logged in, redirect to login page
     if (!isset($_SESSION['user_id'])) {
         header("Location: login.php");
         exit();
@@ -41,25 +41,23 @@ if (isset($_POST['submit_review'])) {
         $sql = "INSERT INTO reviews (user_id, content, rating, created_at) VALUES (?, ?, ?, NOW())";
         $stmt = $conn->prepare($sql);
         $rating_int = (int)$rating;
+        $stmt->bind_param("isi", $user_id, $content, $rating_int);
 
-        if ($stmt) {
-            $stmt->bind_param("isi", $user_id, $content, $rating_int);
-
-            if ($stmt->execute()) {
-                // Set success message in session
-                $_SESSION['success_review_message'] = "Thank you! Your review has been posted successfully.";
-                header("Location: feedback.php");
-                exit();
-            } else {
-                $errorMessages[] = "Database error: " . $stmt->error;
-            }
+        if ($stmt->execute()) {
+            // Set success message in session
+            $_SESSION['success_review_message'] = "Thank you! Your review has been posted successfully.";
             $stmt->close();
+            header("Location: feedback.php");
+            exit();
         } else {
-            $errorMessages[] = "Database error: Unable to prepare statement.";
+            $errorMessages[] = "Database error: " . $stmt->error;
         }
     }
 }
 ?>
+<!-- =================================================================
+// HTML STRUCTURE
+// ================================================================= -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,19 +65,7 @@ if (isset($_POST['submit_review'])) {
 <head>
     <title>Feedback</title>
     <?php include "head_links.php" ?>
-    <style>
-        .star {
-            font-size: 1.2rem;
-        }
 
-        .gold {
-            color: #ffc107;
-        }
-
-        .gray {
-            color: #e4e5e9;
-        }
-    </style>
 </head>
 
 <body>
@@ -87,29 +73,33 @@ if (isset($_POST['submit_review'])) {
 
     <div class="container mt-4">
 
-        <?php
-        if (isset($_SESSION['review_deleted_message'])) {
-            echo '<p class="alert alert-success">' . $_SESSION['review_deleted_message'] . '</p>';
-            unset($_SESSION['review_deleted_message']);
-        }
-        ?>
-        <?php 
-        if (isset($_SESSION['success_review_message'])): ?>
-            <p class="alert alert-success">
-                <?php
-                echo $_SESSION['success_review_message'];
-                unset($_SESSION['success_review_message']); // Remove after showing
-                ?>
-            </p>
+        <!-- "Review deleted" alert message-->
+        <?php if (isset($_SESSION['review_deleted_message'])): ?>
+            <div class="alert alert-success">
+                <?= $_SESSION['review_deleted_message'] ?>
+            </div>
+            <?php unset($_SESSION['review_deleted_message']); ?>
         <?php endif; ?>
+
+        <!-- "Review added" alert message-->
+        <?php if (isset($_SESSION['success_review_message'])): ?>
+            <div class="alert alert-success">
+                <?= $_SESSION['success_review_message'] ?>
+            </div>
+            <?php unset($_SESSION['success_review_message']); ?>
+        <?php endif; ?>
+
+        <!-- Top section -->
         <div class="row justify-content-center mb-5">
             <div class="col-12 col-md-8 col-lg-6">
                 <div class="card shadow-sm border border-2 border-secondary">
                     <div class="card-body">
                         <h4 class="card-title text-center mb-3">Leave a Review</h4>
 
+                        <!-- need to be logged in to leave a review -->
                         <?php if (isset($_SESSION['user_id'])): ?>
 
+                            <!-- display error messages if there are any -->
                             <?php if (!empty($errorMessages)): ?>
                                 <div class="alert alert-danger">
                                     <ul class="mb-0 pl-3">
@@ -118,6 +108,7 @@ if (isset($_POST['submit_review'])) {
                                 </div>
                             <?php endif; ?>
 
+                            <!-- Review form -->
                             <form action="feedback.php" method="POST">
                                 <div class="mb-3">
                                     <textarea name="review_content" class="form-control" rows="3" placeholder="Write your experience..." required><?php echo htmlspecialchars($content); ?></textarea>
@@ -140,18 +131,21 @@ if (isset($_POST['submit_review'])) {
                                 </div>
                             </form>
 
+                            <!-- log in to leave a review -->
                         <?php else: ?>
                             <div class="text-center py-3">
                                 <p class="text-muted">Please <a href="login.php">login</a> to share your experience.</p>
                             </div>
                         <?php endif; ?>
+
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!-- Top section end -->
 
-        <hr class="my-5">
+        <hr class="my-5 hr-dark"><!-- line for visual separation between form and posted feedbacks -->
 
+        <!-- Bottom section -->
         <div class="feedback-header mb-4">
             <h2>Community Reviews</h2>
         </div>
@@ -169,8 +163,11 @@ if (isset($_POST['submit_review'])) {
             if ($result && $result->num_rows > 0):
                 while ($row = $result->fetch_assoc()):
             ?>
+                    <!-- Feeback card -->
                     <div class="col-12 col-md-6 mb-4">
                         <div class="card h-100 shadow-sm">
+
+                            <!-- Name and date -->
                             <div class="card-header bg-white d-flex justify-content-between align-items-center">
                                 <h5 class="card-title m-0">
                                     <?= htmlspecialchars($row['first_name'] . " " . $row['last_name']); ?>
@@ -179,7 +176,7 @@ if (isset($_POST['submit_review'])) {
                                     <?= date('d.m.Y', strtotime($row['created_at'])); ?>
                                 </small>
                             </div>
-
+                            <!-- Rating and comment -->
                             <div class="card-body">
                                 <div class="mb-2">
                                     <?php
@@ -204,6 +201,7 @@ if (isset($_POST['submit_review'])) {
                                         <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Delete this review?');">Delete</button>
                                     </form>
                                 </div>
+                                
                             <?php endif; ?>
                         </div>
                     </div>
