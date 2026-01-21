@@ -126,7 +126,7 @@ if (isset($_POST['submit_review'])) {
                                         </select>
                                     </div>
                                     <div class="col text-right">
-                                        <button type="submit" name="submit_review" class="btn btn-primary w-100">Post</button>
+                                        <button type="submit" name="submit_review" class="btn btn-success w-100">Post</button>
                                     </div>
                                 </div>
                             </form>

@@ -106,7 +106,7 @@ if (isset($_POST['submit_event'])) {
 
             <!-- Button to fold form in and out -->
             <div class="text-center mb-4">
-                <button class="btn btn-secondary"
+                <button class="btn btn-success"
                     type="button"
                     data-toggle="collapse"
                     data-target="#createEventForm"
@@ -241,7 +241,7 @@ if (isset($_POST['submit_event'])) {
                             <!--Event information in card-->
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($row["title"]); ?></h5>
-                                <p class="card-text text-muted small"><?php echo nl2br(htmlspecialchars(substr($row["description"], 0, 100))) . '...'; ?></p>
+                                <p class="card-text text-muted small"><?php echo nl2br(htmlspecialchars($row["description"])); ?></p>
 
                                 <ul class="list-unstyled small mt-3">
                                     <li><i class="fa-regular fa-calendar me-2"></i> <?php echo date('d.m.Y', strtotime($row["event_date"])); ?></li>
