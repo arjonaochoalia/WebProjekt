@@ -102,3 +102,9 @@
 .event-header .btn:hover {
     background-color: var(--main-bg-color);
 }
+
+@media (max-width: 991.98px) {
+    .navbar-nav + .navbar-nav {
+        margin-top: 1rem;
+    }
+}

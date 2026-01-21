@@ -14,12 +14,14 @@ $currentPage = basename($_SERVER['PHP_SELF']); //current page
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
+        <!-- active page -->
         <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link <?= $currentPage === 'index.php' ? 'active' : '' ?>" href="index.php">Home</a>
             <a class="nav-item nav-link <?= $currentPage === 'events.php' ? 'active' : '' ?>" href="events.php">Events</a>
             <a class="nav-item nav-link <?= $currentPage === 'feedback.php' ? 'active' : '' ?>" href="feedback.php">Feedback</a>
         </div>
 
+        <!-- Login or Name + Logout -->
         <div class="navbar-nav ml-auto">
             <?php if (isset($_SESSION['first_name'])): ?>
                 <a class="nav-item nav-link <?= $currentPage === 'profile.php' ? 'active' : '' ?>" href="profile.php">

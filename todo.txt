@@ -1,4 +1,0 @@
-TODO
-- 
-
-admin Panel should Show in personal Information, amount of Events created and a how many People participated
