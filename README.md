@@ -1,6 +1,7 @@
 Web Project created by Lia Arjona Ochoa and Supjan Jakumov
 
 The purpose of this project is:
+
 *build a collaborative beauty event management platform
 *learn server-side development using PHP
 *manage relational databases with MySQL
